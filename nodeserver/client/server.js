@@ -36,7 +36,7 @@ app.use(bodyParser.json())
 
 // Route prefix
 app.use('/api', connectionRoutes)
-app.use('/api/static', express.static(path.join(__dirname, 'public')))
+app.use('/api/static', express.static(path.join(__dirname, 'poo')))
 // Catch unsupported routes (http 400 - bad request) Must come after all registered middleware routes
 app.use((req, res, next) => {
   return next(new HttpError(400, 'Route not defined.'))

@@ -25,7 +25,6 @@ const HttpError = require('./models/http-error')
 const express = require('express')
 const connectionRoutes = require('./routes/connection-routes')
 const path = require('path')
-const tools = require('./libraries/tools')
 // Custom error class
 
 // Get instance of Express
