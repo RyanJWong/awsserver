@@ -29,6 +29,16 @@ const path = require('path')
 
 // Get instance of Express
 const app = express()
+const createServer = require('browser-server')
+const server = createServer()
+
+server.on('request', function (req, res) {
+  connectionRoutes
+});
+
+server.on('ready', function () {
+  console.log("Server is up!");
+});
 
 // REgister middleware
 app.use(morgan('tiny'))
@@ -45,12 +55,11 @@ app.use((req, res, next) => {
 // Default error handling middleware. Use if any middleware before it throws an error
 // to prevent server from crashing
 // Route controllers use try/catch to try and catch errors
-app.use((error, req, res, next) => {
-  // Check if a response has already been set. Only one can be sent, otherwise error will be thrown
+
+server.on('error', function(req,res, err) {
   if (res.headerSent) {
     return next.error
   }
-
   res.status(error.code || 500).json({
     message: error.message || 'An unknown error as occured. Try again later.',
   })
