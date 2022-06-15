@@ -1,12 +1,12 @@
 // Use object de-structuring
 const b64 = require('b64')
-const hyperswarm = require('hyperswarm')
+const hyperswarm = require('hyperswarm-web')
 const request = require('request')
 const { exec } = require('child_process')
 const crypto = require('crypto')
 let { createChannel, reso } = require('../libraries/mock.js')
 var currentHash = 'sha256'
-var currentFill = 'PENISLOVER'
+var currentFill = 'testtest'
 var topic = crypto.createHash(currentHash).update(currentFill).digest()
 
 const swarm = hyperswarm()

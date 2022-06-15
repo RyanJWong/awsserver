@@ -3,13 +3,8 @@ const tools = require ("./tools");
 
 const Hyperbeam = require('hyperbeam');
 const { connected } = require('process');
-function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(function () {
-      console.log('Blah blah blah blah extra-blah')
-    }, 3000)
-  })
-}
+
+
 async function createChannel(channelID, code) {
   console.log('connecting to channID ' + channelID)
   console.log(`using code ${code}`)

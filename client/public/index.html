@@ -326,7 +326,7 @@ pre.line-numbers>code {
 }
 
 .connect-setting input {
-    background-color: #cfc6c6; 
+    background-color: #141414;
     border-radius: 4px;
     border: none;
     font-size: 1.25em;
@@ -425,7 +425,6 @@ pre {
     <span class="control"></span>
     <span class="control"></span>
     <div id="editor" style="height: 50%; width: 100%; margin-top: 16px;">
-
 def fibonacci(max_n):
     n, prev = 1, 1
     while n <= max_n:
@@ -470,30 +469,30 @@ function toggleConnectionEditor() {
 
 function executeCodeRequest() {
    
-    var code = encodeURIComponent(btoa(editor.getValue())) //+"==" //btoa(editor.getValue());
-    console.log(leditor.getValue())
-    // var code = "CmRlZiBmaWJvbmFjY2kobWF4X24pOgogICAgbiwgcHJldiA9IDEsIDEKICAgIHdoaWxlIG4gPD0gbWF4X246CiAgICAgICAgeWllbGQgbgogICAgICAgIG4sIHByZXYgPSBuICsgcHJldiwgbgoKCmRlZiBsYW1iZGFfaGFuZGxlcihldmVudCwgY29udGV4dCk6CiAgICBwcmludChldmVudCkKICAgIHRvdGFsID0gc3VtKG4gZm9yIG4gaW4gZmlib25hY2NpKGV2ZW50WyJ2YWx1ZSJdKSBpZiBuICUgMiA9PSAwKQogICAgcmV0dXJuIHRvdGFsCg%3D%3D&"
+   var code = encodeURIComponent(btoa(editor.getValue())) //+"==" //btoa(editor.getValue());
+   console.log(leditor.getValue())
+   // var code = "CmRlZiBmaWJvbmFjY2kobWF4X24pOgogICAgbiwgcHJldiA9IDEsIDEKICAgIHdoaWxlIG4gPD0gbWF4X246CiAgICAgICAgeWllbGQgbgogICAgICAgIG4sIHByZXYgPSBuICsgcHJldiwgbgoKCmRlZiBsYW1iZGFfaGFuZGxlcihldmVudCwgY29udGV4dCk6CiAgICBwcmludChldmVudCkKICAgIHRvdGFsID0gc3VtKG4gZm9yIG4gaW4gZmlib25hY2NpKGV2ZW50WyJ2YWx1ZSJdKSBpZiBuICUgMiA9PSAwKQogICAgcmV0dXJuIHRvdGFsCg%3D%3D&"
 
-    var event = encodeURIComponent(btoa(leditor.getValue()))
+   var event = encodeURIComponent(btoa(leditor.getValue()))
 
+  
+
+   var settings = {
+       "async": true,
+       "crossDomain": true,
+       "url": "http://localhost:4000/api/execute/",
+       "method": "POST",
+       "headers": {"code": code,"event":"testtest"},
+       "body":{
+           "code": code,
+           "event": "testtest",
+           }
+   }
    
-
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "http://localhost:5000/api/execute/",
-        "method": "POST",
-        "headers": {"code":code,"event":"testtest"},
-        "body":{
-            "code": code,
-            "event": "testtest",
-            }
-    }
-    
-    $.ajax(settings).done(function(response) {
-       
-        $(".execute-output pre").html(JSON.stringify(response))
-    });
+   $.ajax(settings).done(function(response) {
+      
+       $(".execute-output pre").html(JSON.stringify(response))
+   });
 }
 
 
