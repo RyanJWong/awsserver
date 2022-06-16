@@ -5,14 +5,11 @@ const request = require('request')
 const { exec } = require('child_process')
 const crypto = require('crypto')
 let { createChannel, reso } = require('../libraries/mock.js')
-var currentHash = 'sha256'
-var currentFill = 'testtest'
-var topic = crypto.createHash(currentHash).update(currentFill).digest()
+var currentFill;
 
 const swarm = hyperswarm()
 
-// CRUD operations
-swarm.join(topic)
+
 
 swarm.on('connection', (conn, info) => {
   // swarm will receive server connections
@@ -21,10 +18,12 @@ swarm.on('connection', (conn, info) => {
 
   conn.on('data', (data) => console.log('Connection:', decode(data.toString())))
 })
+
 swarm.on('disconnection', (conn, details) => {
   console.log(details.peer.host, 'disconnected!')
   console.log('now we have', swarm.peers.length, 'peers!')
 })
+
 const lambda = async (req, res, next) => {
   exec('docker run node:alpine', (error, stdout, stderr) => {
     if (error) {
@@ -58,19 +57,18 @@ const resolve = async (req,res,next) =>{
   })
 }
 const getKey = async (req, res, next) => {
-  res.json({ hash: currentHash, fill: currentFill })
+  res.json({fill: currentFill })
 }
 
 const connect = async (req, res, next) => {
-  let { hash, fill } = req.body
-  let newTopic = crypto.createHash('sha256').update('PENISLOVER').digest()
+  let { fill } = req.body
+  let newTopic = crypto.createHash('sha256').update(fill).digest()
 
-  if (currentHash == hash && currentFill == fill) {
+  if (currentFill == fill) {
     res.json({ message: 'Hyper core is already connected to topic' })
   } else {
     swarm.join(newTopic)
     topic = newTopic
-    currentHash = hash
     currentFill = fill
     res.json({
       message:

@@ -20,49 +20,27 @@ global.serverPort = 4000
 // HTTP request logger
 // how to use morgan in your express project
 const morgan = require('morgan')
-const bodyParser = require('body-parser')
 const HttpError = require('./models/http-error')
 const express = require('express')
-const connectionRoutes = require('./routes/connection-routes')
 const path = require('path')
 // Custom error class
-
+const swarm = require('./controllers/swarm-controller')
 // Get instance of Express
-const app = express()
 const createServer = require('browser-server')
 const server = createServer()
 
 server.on('request', function (req, res) {
-  connectionRoutes
-});
-
-server.on('ready', function () {
-  console.log("Server is up!");
-});
-
-// REgister middleware
-app.use(morgan('tiny'))
-app.use(bodyParser.json())
-
-// Route prefix
-app.use('/api', connectionRoutes)
-app.use('/api/static', express.static(path.join(__dirname, 'public')))
-// Catch unsupported routes (http 400 - bad request) Must come after all registered middleware routes
-app.use((req, res, next) => {
-  return next(new HttpError(400, 'Route not defined.'))
+  swarm.connect(req)
 })
 
-// Default error handling middleware. Use if any middleware before it throws an error
-// to prevent server from crashing
-// Route controllers use try/catch to try and catch errors
+server.on('ready', function () {
+  console.log("Server is up!")
+})
+
 
 server.on('error', function(req,res, err) {
-  if (res.headerSent) {
-    return next.error
-  }
   res.status(error.code || 500).json({
     message: error.message || 'An unknown error as occured. Try again later.',
   })
 })
 
-app.listen(global.serverPort)
