@@ -472,8 +472,6 @@ function toggleConnectionEditor() {
 function executeCodeRequest() {
    
    var code = encodeURIComponent(btoa(editor.getValue())) //+"==" //btoa(editor.getValue());
-   console.log(leditor.getValue())
-   // var code = "CmRlZiBmaWJvbmFjY2kobWF4X24pOgogICAgbiwgcHJldiA9IDEsIDEKICAgIHdoaWxlIG4gPD0gbWF4X246CiAgICAgICAgeWllbGQgbgogICAgICAgIG4sIHByZXYgPSBuICsgcHJldiwgbgoKCmRlZiBsYW1iZGFfaGFuZGxlcihldmVudCwgY29udGV4dCk6CiAgICBwcmludChldmVudCkKICAgIHRvdGFsID0gc3VtKG4gZm9yIG4gaW4gZmlib25hY2NpKGV2ZW50WyJ2YWx1ZSJdKSBpZiBuICUgMiA9PSAwKQogICAgcmV0dXJuIHRvdGFsCg%3D%3D&"
 
    var event = encodeURIComponent(btoa(leditor.getValue()))
 
@@ -482,7 +480,7 @@ function executeCodeRequest() {
    var settings = {
        "async": true,
        "crossDomain": true,
-       "url": "http://127.0.0.1:5500/client",
+       "url": "http://127.0.0.1:5500/client/public",
        "method": "POST",
        "headers": {"code": code,"event":"testtest"},
        "body":{
