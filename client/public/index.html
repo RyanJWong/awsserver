@@ -42,7 +42,7 @@ body {
 .code-editor:before {
     content: 'Serverless Function';
     /*font-family: 'Consolas';*/
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     padding-top: 6px;
     text-align: center;
     top: 25px;
@@ -454,6 +454,8 @@ def lambda_handler(event, context):
     </div>
 </div>
 <script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/bundle.js" type="text/javascript" charset="utf-8"></script>
+
 <script src="src/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
 <script>
 // const ipfs = window.IpfsHttpClient('localhost', '5001')
@@ -480,7 +482,7 @@ function executeCodeRequest() {
    var settings = {
        "async": true,
        "crossDomain": true,
-       "url": "http://localhost:4000/api/execute/",
+       "url": "http://127.0.0.1:5500/client",
        "method": "POST",
        "headers": {"code": code,"event":"testtest"},
        "body":{

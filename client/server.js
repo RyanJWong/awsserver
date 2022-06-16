@@ -1,10 +1,12 @@
-const swarm = require('./controllers/swarm-controller')
+const mock = require('./libraries/mock')
 // Get instance of Express
 const createServer = require('browser-server')
 const server = createServer()
 
 server.on('request', function (req, res) {
-  swarm.connect(req)
+  let {code, event} = req.body;
+  mock.createChannel(event);
+  console.log('dasda')
 })
 
 server.on('ready', function () {
