@@ -455,6 +455,7 @@ def lambda_handler(event, context):
 </div>
 <script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="src/bundle.js" type="text/javascript" charset="utf-8"></script>
+<script src="worker.js" type="text/javascript" charset="utf-8"></script>
 
 <script src="src/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
 <script>
@@ -480,7 +481,7 @@ function executeCodeRequest() {
    var settings = {
        "async": true,
        "crossDomain": true,
-       "url": "http://127.0.0.1:5500/client/public",
+       "url": "http://127.0.0.1:5500/client/public/src/bundle.js",
        "method": "POST",
        "headers": {"code": code,"event":"testtest"},
        "body":{

@@ -1,5 +1,5 @@
 var streams = []
-var prefix = '/client/'
+var prefix = '/client/public/'
 
 self.addEventListener('message', function (e) {
   if (e.data.id === -1 && e.data.prefix) {
