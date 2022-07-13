@@ -484,14 +484,11 @@ function executeCodeRequest() {
 
    var settings = {
        "async": true,
-       "crossDomain": true,
-       "url": "http://127.0.0.1:5500/client/public/src/bundle.js",
        "method": "POST",
-       "headers": {"code": code,"event":"testtest"},
        "body":{
            "code": code,
-           "event": "testtest",
-           }
+           "event": event,
+        }
    }
    
    $.ajax(settings).done(function(response) {
