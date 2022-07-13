@@ -1,4 +1,3 @@
-const mock = require('./libraries/mock')
 // Get instance of Express
 const createServer = require('browser-server')
 const server = createServer()
